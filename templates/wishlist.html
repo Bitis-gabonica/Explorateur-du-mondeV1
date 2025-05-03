@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Ma liste</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+      background: #000;
+      color: #fff;
+      font-family: 'Orbitron', sans-serif;
+    }
+    .futuristic-card {
+      background: rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(14px);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      border-radius: 1.25rem;
+      box-shadow: 0 0 20px #000;
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: .4rem;
+      padding: .45rem 1rem;
+      border: 1px solid #fff;
+      border-radius: 9999px;
+      color: #fff;
+      font-size: .75rem;
+      font-weight: 500;
+      letter-spacing: .05em;
+      text-transform: uppercase;
+      transition: background .2s ease, color .2s ease, box-shadow .2s ease;
+    }
+    .btn:hover {
+      background: #fff;
+      color: #000;
+      box-shadow: 0 0 12px #fff;
+    }
+  </style>
+</head>
+<body>
+  <div class="max-w-6xl mx-auto p-6">
+    <h1 class="text-3xl font-bold mb-6 text-white"> Mes pays à visiter</h1>
+
+    {% if countries %}
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {% for c in countries %}
+        <div class="futuristic-card">
+          <img src="{{ c.flag_url }}" alt="drapeau" class="w-20 mb-4">
+          <h2 class="text-lg font-semibold">{{ c.name }}</h2>
+          <p class="text-sm text-white text-opacity-80 mb-1">Capitale : {{ c.capital }}</p>
+          <p class="text-sm text-white text-opacity-80">Région : {{ c.region }}</p>
+          <a href="/remove/{{ c.id }}" class="mt-4 btn">Supprimer</a>
+        </div>
+        {% endfor %}
+      </div>
+    {% else %}
+      <p class="text-white text-opacity-80">Tu n'as ajouté aucun pays !</p>
+    {% endif %}
+
+    <a href="/" class="mt-8 inline-block btn">Retour</a>
+  </div>
+</body>
+</html>

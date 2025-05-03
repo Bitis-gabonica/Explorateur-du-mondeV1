@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>{{ country.name }}</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+      background: #000;
+      color: #fff;
+      font-family: 'Orbitron', sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .futuristic-card {
+      max-width: 32rem;
+      width: 90%;
+      padding: 2rem;
+      border-radius: 1.25rem;
+      background: rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(14px);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      box-shadow: 0 0 20px #000;
+    }
+    .futuristic-card h1 {
+      font-size: 1.75rem;
+      font-weight: 700;
+      text-shadow: 0 0 6px #ffffff88;
+    }
+    .futuristic-card ul li {
+      margin-bottom: .4rem;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: .4rem;
+      padding: .45rem 1rem;
+      border: 1px solid #fff;
+      border-radius: 9999px;
+      color: #fff;
+      font-size: .75rem;
+      font-weight: 500;
+      letter-spacing: .05em;
+      text-transform: uppercase;
+      transition: background .2s ease, color .2s ease, box-shadow .2s ease;
+    }
+    .btn:hover {
+      background: #fff;
+      color: #000;
+      box-shadow: 0 0 12px #fff;
+    }
+  </style>
+</head>
+<body>
+  <div class="futuristic-card">
+    <div class="flex items-center gap-4 mb-6">
+      <img src="{{ country.flag_url }}" alt="Drapeau de {{ country.name }}" class="w-20 border rounded">
+      <h1>{{ country.name }}</h1>
+    </div>
+    <ul class="text-sm leading-relaxed mb-6">
+      <li><strong>Capitale :</strong> {{ country.capital }}</li>
+      <li><strong>Région :</strong> {{ country.region }}</li>
+      <li><strong>Langues :</strong> {{ country.languages }}</li>
+      <li><strong>Monnaie :</strong> {{ country.currency }}</li>
+      <li><strong>Fuseau horaire :</strong> {{ country.timezone }}</li>
+    </ul>
+    <div class="flex gap-4">
+      <a href="/add/{{ country.code }}" class="btn">Ajouter à ma liste</a>
+      <a href="/" class="btn">Retour</a>
+    </div>
+  </div>
+</body>
+</html>

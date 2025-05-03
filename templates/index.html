@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <title>Explorateur de Monde</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/jsvectormap/dist/css/jsvectormap.min.css" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/jsvectormap"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jsvectormap/dist/maps/world.js"></script>
+  <style>
+    /* ==== BASE ==== */
+    html,body{
+      height:100%;margin:0;background:#000;color:#f5f5f5;font-family:'Orbitron',sans-serif;overflow:hidden;
+    }
+    /* Map container — transparent glass */
+    #world-map{
+      position:fixed;inset:0;
+      background:rgba(255,255,255,.05);
+      backdrop-filter:blur(8px);
+    }
+    /* Countries = white outlines */
+    .jvm-region{
+      fill:rgba(255,255,255,0.0);
+      stroke:#ffffff;
+      stroke-width:1;
+      transition:stroke .25s ease, fill .25s ease, filter .25s ease;
+      
+      cursor:pointer;
+    }
+    .jvm-region:hover{
+      fill:rgba(255,255,255,0.15)!important;
+      stroke:#ffffff!important;
+      filter:drop-shadow(0 0 6px #ffffff);
+    }
+
+    /* ==== UI PANEL (transparent) ==== */
+    #ui{
+      position:fixed;top:1rem;left:1rem;z-index:10;
+      padding:1rem 1.5rem;border-radius:1rem;
+      background:rgba(255,255,255,.05);
+      backdrop-filter:blur(10px);
+      border:1px solid rgba(255,255,255,.4);
+    }
+    #ui h1{
+      font-size:1.5rem;font-weight:700;display:flex;align-items:center;gap:.5rem;
+      color:#ffffff;
+      text-shadow:0 0 6px #ffffff66;
+    }
+    /* Buttons transparent white */
+    .btn{
+      display:inline-flex;align-items:center;gap:.4rem;padding:.45rem 1rem;
+      border:1px solid #ffffff;border-radius:9999px;color:#ffffff;
+      font-size:.75rem;font-weight:500;letter-spacing:.05em;text-transform:uppercase;
+      transition:background .2s ease, color .2s ease, box-shadow .2s ease;
+    }
+    .btn:hover{
+      background:#ffffff;color:#000;box-shadow:0 0 12px #ffffff;
+    }
+    .btn svg{width:1rem;height:1rem;stroke:currentColor;}
+  </style>
+</head>
+<body>
+  <!-- UI -->
+  <div id="ui" class="space-y-3">
+    <h1><span>🌐</span><span>Explorateur de Monde</span></h1>
+    <div class="flex gap-3">
+      <a href="/wishlist" class="btn"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-width="1.5" fill="none"><path stroke-linecap="round" stroke-linejoin="round" d="M5 5v14l7-7 7 7V5H5z"/></svg>Wishlist</a>
+      <a href="/quiz" class="btn"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-width="1.5" fill="none"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6l4 2"/></svg>Quiz</a>
+    </div>
+  </div>
+
+  <!-- Map -->
+  <div id="world-map"></div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const map = new jsVectorMap({
+        selector: '#world-map',
+        map: 'world',
+        zoomButtons: false,
+        zoomOnScroll: false,
+        regionStyle: { initial: { cursor: 'pointer' } },
+        onRegionClick(index, code) {
+          window.location.href = `/country/${code.toLowerCase()}`;
+        }
+      });
+      window.addEventListener('resize', () => map.updateSize());
+    });
+  </script>
+</body>
+</html>
