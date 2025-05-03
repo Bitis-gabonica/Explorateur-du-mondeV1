@@ -1,3 +1,4 @@
+Abdoulaye Ly CDSD 3
 # 🌍 Explorateur de monde
 
 Application Flask pour découvrir les pays du monde, les ajouter à une liste de pays à visiter, et jouer à un quiz géographique.
@@ -68,4 +69,4 @@ http://localhost:5000
 - [OpenStreetMap / Leaflet](https://leafletjs.com)
 
 ## Auteur
-Projet étudiant réalisé pour l'apprentissage de Flask + intégration API.
+Abdoulaye Ly CDSD 3
